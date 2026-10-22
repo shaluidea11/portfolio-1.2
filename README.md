@@ -1,32 +1,64 @@
-# React + TypeScript + Vite
+# Shalu — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal portfolio for **Shalu**, AI Generalist & full-stack builder.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + Vite + TypeScript (strict)
+- Tailwind CSS v4
+- Self-hosted variable fonts (Syne, Inter Tight)
+- Hash-based routing for GitHub Pages
+- No heavy dependencies — CSS-first, native `<dialog>`, minimal JS
 
-## React Compiler
+## Quick start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev        # dev server at localhost:5173
+npm run build      # production build to dist/
+npm run preview    # preview production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## How to add a project
+
+1. Open `src/data/projects.ts`
+2. Add a new entry to the `projects` array following the `Project` type
+3. Required fields: `slug`, `title`, `oneLiner`, `status`, `stack[]`, `links[]`, `bentoSize`, `accentColor`
+4. For a full case study, add a `caseStudy` object with: `friction`, `whoItsFor`, `whatIBuilt`, `howItWorks`, `decisions[]`, `whatNext`, `designerLens`
+5. Set `caseStudy: null` for projects without a full write-up
+6. Tag the project in `src/data/skills.ts` by adding its slug to relevant skills' `projectSlugs` arrays
+7. Add screenshots to `public/projects/<slug>/` and list paths in `images[]`
+
+## Content validation
+
+```bash
+npx tsx scripts/check-content.ts
+```
+
+Fails on: missing `source` comments, duplicate skill names, placeholder images.
+
+## Deployment
+
+Pushes to `main` auto-deploy to GitHub Pages via `.github/workflows/deploy.yml`.
+
+**Before deploying:**
+1. Update `base` in `vite.config.ts` to match your repo name (e.g. `'/portfolio/'`)
+2. Enable GitHub Pages → Settings → Pages → Source: GitHub Actions
+
+## Design decisions
+
+- **Flat, colourful bento** — inspired by modern flat portfolio references
+- **CSS Grid with named areas** — explicit layout control for the asymmetric hero
+- **Corner bracket notch** — subtle `┐` affordance on interactive tiles
+- **No fabricated metrics** — every number comes from `src/data/` with a `source` comment
+- **Honest positioning** — skills and experience presented as-is, no inflation
+- **Designer lens** — each project links back to workflow tooling thinking
+
+## Accessibility
+
+- WCAG 2.2 AA colour contrast (documented in `docs/contrast.md`)
+- Skip link, semantic landmarks, single `<h1>`, logical heading order
+- Keyboard-operable with visible focus rings
+- `prefers-reduced-motion` respected everywhere
+- `aria-label` on icon-only controls, `aria-hidden` on decorative elements
+- Touch targets ≥ 44px

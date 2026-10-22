@@ -1,9 +1,12 @@
 // src/components/bento/WorkSection.tsx
-// Work bento: 6 project tiles in asymmetric grid + stat tiles.
+// Work bento: 6 project tiles in asymmetric grid + stat tiles + maze canvas.
 
+import { Suspense, lazy } from 'react';
 import { projects, stats } from '../../data/projects';
 import { ProjectTile } from './ProjectTile';
 import { StatTile } from './StatTile';
+
+const MazeCanvas = lazy(() => import('../maze/MazeCanvas').then(m => ({ default: m.MazeCanvas })));
 
 interface WorkSectionProps {
   onOpenProject: (slug: string) => void;
@@ -33,6 +36,17 @@ export function WorkSection({ onOpenProject, dimmedSlugs }: WorkSectionProps) {
             accentColor="var(--color-white)"
           />
         ))}
+
+        {/* Maze solver stretch tile — lazy loaded */}
+        <div className="bento-2x1">
+          <Suspense fallback={
+            <div className="tile tile-white" style={{ minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-graphite)' }}>
+              Loading maze…
+            </div>
+          }>
+            <MazeCanvas />
+          </Suspense>
+        </div>
       </div>
     </section>
   );

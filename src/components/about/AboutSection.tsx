@@ -19,8 +19,9 @@ export function AboutSection({ activeSkill, onSelectSkill }: AboutSectionProps) 
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
-          gap: 'var(--gap-section)',
+          gap: 'var(--gap-tile)',
         }}
+        className="about-grid"
       >
         {/* Bio + skills */}
         <div
