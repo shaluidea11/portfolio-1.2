@@ -25,7 +25,7 @@ export function HeroSection() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            padding: '32px 36px',
+            padding: 'clamp(20px, 4vw, 36px)',
             overflow: 'hidden',
           }}
         >
@@ -41,7 +41,7 @@ export function HeroSection() {
             flexDirection: 'column',
             justifyContent: 'center',
             gap: 16,
-            padding: '24px 28px',
+            padding: 'clamp(18px, 3vw, 28px)',
           }}
         >
           <p

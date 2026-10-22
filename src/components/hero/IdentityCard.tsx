@@ -6,11 +6,23 @@ import { profile } from '../../data/profile';
 import { RotatingBadge } from './RotatingBadge';
 import { useState } from 'react';
 
-// Public directory assets must be referenced via BASE_URL at runtime (not imported)
-const portraitUrl = `${import.meta.env.BASE_URL}shalu.png`;
+import portraitImg from '../../assets/shalu.png';
 
 export function IdentityCard() {
+  const [imgSrc, setImgSrc] = useState<string>(portraitImg);
   const [imgError, setImgError] = useState(false);
+
+  const handleImageError = () => {
+    // Multi-tier fallback if bundled asset fails:
+    const publicUrl = `${import.meta.env.BASE_URL}shalu.png`;
+    if (imgSrc !== publicUrl) {
+      setImgSrc(publicUrl);
+    } else if (imgSrc !== '/shalu.png') {
+      setImgSrc('/shalu.png');
+    } else {
+      setImgError(true);
+    }
+  };
 
   return (
     <div
@@ -76,10 +88,10 @@ export function IdentityCard() {
           {/* Portrait */}
           {!imgError ? (
             <img
-              src={portraitUrl}
+              src={imgSrc}
               alt={`Portrait of ${profile.name}`}
               className="portrait-img"
-              onError={() => setImgError(true)}
+              onError={handleImageError}
               loading="eager"
             />
           ) : (

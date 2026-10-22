@@ -677,6 +677,28 @@ dialog[open] {
   .bento-2x2 { grid-column: span 2; grid-row: span 2; }
 }
 
+/* ── Wordmark display ── */
+
+.wordmark-title {
+  font-size: clamp(2.4rem, 8.5vw + 0.4rem, 8.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+  margin: 0;
+  color: var(--color-ink);
+  max-width: 100%;
+  white-space: normal;
+  word-break: keep-all;
+}
+
+.wordmark-notch {
+  position: absolute;
+  top: 0.02em;
+  right: -0.25em;
+  width: 0.22em;
+  height: 0.22em;
+}
+
 /* ── Hero grid (reference-matching layout) ── */
 
 .hero-grid {
@@ -695,8 +717,24 @@ dialog[open] {
     "cta";
 }
 
-/* Small mobile — stats side by side */
-@media (min-width: 400px) and (max-width: 639px) {
+/* Phones 340px - 499px: stats side-by-side, everything else single column */
+@media (min-width: 340px) and (max-width: 499px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "identity  identity"
+      "wordmark  wordmark"
+      "workflow  workflow"
+      "stat1     stat2"
+      "location  location"
+      "skills    skills"
+      "education education"
+      "cta       cta";
+  }
+}
+
+/* Large phones / small phablets 500px - 639px */
+@media (min-width: 500px) and (max-width: 639px) {
   .hero-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -710,6 +748,7 @@ dialog[open] {
   }
 }
 
+/* Tablets 640px - 1023px */
 @media (min-width: 640px) {
   .hero-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -723,6 +762,7 @@ dialog[open] {
   }
 }
 
+/* Desktop 1024px+ — exact 4-column reference layout */
 @media (min-width: 1024px) {
   .hero-grid {
     grid-template-columns: minmax(240px, 280px) minmax(0, 1.5fr) minmax(0, 1fr) minmax(110px, 160px);
