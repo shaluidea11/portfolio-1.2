@@ -19,7 +19,7 @@ export function HeroSection() {
 
         {/* Wordmark tile — top right, wide */}
         <div
-          className="tile tile-white"
+          className="tile tile-white wordmark-tile"
           style={{
             gridArea: 'wordmark',
             display: 'flex',

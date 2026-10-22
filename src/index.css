@@ -680,15 +680,17 @@ dialog[open] {
 /* ── Wordmark display ── */
 
 .wordmark-title {
-  font-size: clamp(2.4rem, 8.5vw + 0.4rem, 8.5rem);
+  font-size: clamp(2rem, 15cqi, 8.5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.86;
   margin: 0;
   color: var(--color-ink);
-  max-width: 100%;
-  white-space: normal;
-  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.wordmark-tile {
+  container-type: inline-size;
 }
 
 .wordmark-notch {
@@ -923,4 +925,3 @@ dialog[open] {
     height: 100px !important;
   }
 }
-
