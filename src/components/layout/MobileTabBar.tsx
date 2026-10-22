@@ -16,7 +16,7 @@ const tabItems: TabItem[] = [
 
 export function MobileTabBar() {
   return (
-    <nav className="mobile-tab-bar md:hidden" aria-label="Main navigation">
+    <nav className="mobile-tab-bar" aria-label="Main navigation">
       {tabItems.map((item) => (
         <a
           key={item.href}

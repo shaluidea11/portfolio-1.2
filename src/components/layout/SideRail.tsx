@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
 
 export function SideRail() {
   return (
-    <nav className="side-rail hidden md:flex" aria-label="Main navigation">
+    <nav className="side-rail" aria-label="Main navigation">
       {navItems.map((item) => (
         <a
           key={item.href}

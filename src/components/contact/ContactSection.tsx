@@ -21,7 +21,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" aria-label="Contact" style={{ marginBottom: 'var(--gap-section)' }}>
-      <div className="tile tile-ink" style={{ color: 'var(--color-white)', padding: '48px 32px' }}>
+      <div className="tile tile-ink" style={{ color: 'var(--color-white)', padding: 'clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px)' }}>
         <h2
           className="font-display"
           style={{

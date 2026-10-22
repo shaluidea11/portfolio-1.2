@@ -15,14 +15,7 @@ export function AboutSection({ activeSkill, onSelectSkill }: AboutSectionProps) 
     <section id="about" aria-label="About" style={{ marginBottom: 'var(--gap-section)' }}>
       <h2 className="section-heading">About</h2>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: 'var(--gap-tile)',
-        }}
-        className="about-grid"
-      >
+      <div className="about-grid">
         {/* Bio + skills */}
         <div
           className="tile tile-white"

@@ -6,18 +6,20 @@ import { profile } from '../../data/profile';
 import { RotatingBadge } from './RotatingBadge';
 import { useState } from 'react';
 
+// Public directory assets must be referenced via BASE_URL at runtime (not imported)
+const portraitUrl = `${import.meta.env.BASE_URL}shalu.png`;
+
 export function IdentityCard() {
   const [imgError, setImgError] = useState(false);
 
   return (
     <div
-      className="tile tile-periwinkle"
+      className="tile tile-periwinkle identity-card"
       style={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         gridArea: 'identity',
-        minHeight: 'clamp(400px, 28vw, 500px)',
         color: 'var(--color-ink)',
         padding: '28px 28px 24px',
         position: 'relative',
@@ -45,13 +47,7 @@ export function IdentityCard() {
           marginBottom: 8,
         }}
       >
-        <div
-          style={{
-            position: 'relative',
-            width: 200,
-            height: 200,
-          }}
-        >
+        <div className="portrait-container">
           {/* Decorative ring */}
           <div
             style={{
@@ -69,8 +65,8 @@ export function IdentityCard() {
               top: -12,
               left: '50%',
               transform: 'translateX(-50%)',
-              width: 180,
-              height: 180,
+              width: '90%',
+              height: '90%',
               borderRadius: '50%',
               background: 'rgba(200, 160, 240, 0.4)',
               filter: 'blur(2px)',
@@ -80,39 +76,15 @@ export function IdentityCard() {
           {/* Portrait */}
           {!imgError ? (
             <img
-              src={profile.portraitPath}
+              src={portraitUrl}
               alt={`Portrait of ${profile.name}`}
-              width={200}
-              height={200}
-              style={{
-                borderRadius: '50%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                width: 200,
-                height: 200,
-                position: 'relative',
-                zIndex: 1,
-              }}
+              className="portrait-img"
               onError={() => setImgError(true)}
               loading="eager"
             />
           ) : (
             <div
-              style={{
-                width: 200,
-                height: 200,
-                borderRadius: '50%',
-                backgroundColor: 'var(--color-off-white)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'var(--font-display)',
-                fontWeight: 800,
-                fontSize: '5rem',
-                color: 'var(--color-periwinkle)',
-                position: 'relative',
-                zIndex: 1,
-              }}
+              className="portrait-fallback"
               aria-label={`Monogram for ${profile.name}`}
             >
               S
@@ -137,10 +109,9 @@ export function IdentityCard() {
           I'm,
         </p>
         <p
-          className="font-display"
+          className="font-display identity-name"
           style={{
             fontWeight: 800,
-            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
             lineHeight: 1.0,
             margin: 0,
             letterSpacing: '-0.02em',
@@ -161,8 +132,8 @@ export function IdentityCard() {
       >
         <a
           href={`mailto:${profile.email}`}
+          className="identity-email"
           style={{
-            fontSize: 'var(--text-xs)',
             color: 'var(--color-ink)',
             textDecoration: 'none',
             display: 'flex',

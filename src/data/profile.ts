@@ -16,7 +16,7 @@ export const profile = {
     leetcode: 'https://leetcode.com/u/shasha_04',
   },
   resumePath: 'https://drive.google.com/file/d/1NWLjSJYpkltx7G3GhlTSnoSvrvWREZa2/view?usp=sharing',
-  portraitPath: '/shalu.png',
+  portraitPath: './shalu.png',
   // Badge text for the rotating SVG badge
   badgeText: 'SHALU · AI GENERALIST · 2026 ·',
 } as const;
