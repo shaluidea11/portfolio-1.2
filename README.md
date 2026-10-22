@@ -41,9 +41,9 @@ Fails on: missing `source` comments, duplicate skill names, placeholder images.
 
 Pushes to `main` auto-deploy to GitHub Pages via `.github/workflows/deploy.yml`.
 
-**Before deploying:**
-1. Update `base` in `vite.config.ts` to match your repo name (e.g. `'/portfolio/'`)
-2. Enable GitHub Pages → Settings → Pages → Source: GitHub Actions
+**One-time GitHub setup:** In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**. Do not publish from the repository root: `index.html` there is Vite's development entry and references TypeScript source, so it renders as a blank page when served as static HTML.
+
+Vite derives the project subpath from GitHub Actions' `GITHUB_REPOSITORY` environment variable, so no manual `base` change is needed for GitHub Pages.
 
 ## Design decisions
 
