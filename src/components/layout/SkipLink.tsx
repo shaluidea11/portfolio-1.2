@@ -1,0 +1,9 @@
+// src/components/layout/SkipLink.tsx
+
+export function SkipLink() {
+  return (
+    <a href="#main-content" className="skip-link">
+      Skip to main content
+    </a>
+  );
+}

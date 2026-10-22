@@ -1,0 +1,672 @@
+/* src/index.css */
+/* Main stylesheet — imports Tailwind v4, tokens, and fonts. */
+
+@import 'tailwindcss';
+@import './styles/tokens.css';
+
+/* Self-hosted variable fonts via @fontsource */
+@import '@fontsource-variable/syne';
+@import '@fontsource-variable/inter-tight';
+
+/* ── Base ── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--color-ink);
+  background-color: var(--color-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* ── Focus ── */
+
+:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip link ── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 1000;
+  padding: 8px 16px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-radius: var(--radius-chip);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ── Display type ── */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ── Tile base ── */
+
+.tile {
+  border-radius: var(--radius-tile);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile:hover {
+    transform: none;
+  }
+}
+
+/* ── Tile colours ── */
+
+.tile-periwinkle { background-color: var(--color-periwinkle); }
+.tile-mint { background-color: var(--color-mint); }
+.tile-violet { background-color: var(--color-violet); }
+.tile-butter { background-color: var(--color-butter); }
+.tile-graphite { background-color: var(--color-graphite); }
+.tile-ink { background-color: var(--color-ink); }
+.tile-white { background-color: var(--color-white); }
+.tile-off-white { background-color: var(--color-off-white); }
+
+/* ── Notch glyph ── */
+
+.notch-glyph {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.tile:hover .notch-glyph,
+.tile:focus-within .notch-glyph {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile:hover .notch-glyph,
+  .tile:focus-within .notch-glyph {
+    opacity: 1;
+  }
+}
+
+/* ── Dialog ── */
+
+dialog {
+  border: none;
+  padding: 0;
+  max-width: min(900px, 95vw);
+  width: 100%;
+  border-radius: var(--radius-page);
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+dialog::backdrop {
+  background: rgba(13, 13, 15, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+dialog[open] {
+  animation: dialog-in var(--duration-slow) var(--ease-out);
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[open] {
+    animation: none;
+  }
+}
+
+/* ── Rotating badge ── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.rotating-badge {
+  animation: spin 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-badge {
+    animation: none;
+  }
+}
+
+/* ── Side rail (vertical nav) ── */
+
+.side-rail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  z-index: 50;
+}
+
+.side-rail-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-graphite);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  min-height: 44px;
+}
+
+.side-rail-label:hover,
+.side-rail-label.active {
+  color: var(--color-ink);
+}
+
+/* ── Mobile tab bar ── */
+
+.mobile-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--color-white);
+  border-top: 1px solid rgba(13, 13, 15, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.mobile-tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-graphite);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.mobile-tab-item:hover,
+.mobile-tab-item.active {
+  color: var(--color-ink);
+}
+
+/* ── Chip ── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-chip);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  background: rgba(13, 13, 15, 0.06);
+  color: var(--color-graphite-dark);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.chip-interactive {
+  cursor: pointer;
+  border: none;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.chip-interactive:hover,
+.chip-interactive[aria-pressed="true"] {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.chip-dimmed {
+  opacity: 0.35;
+}
+
+/* ── Button ── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-button);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 44px;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active {
+    transform: none;
+  }
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-graphite);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+}
+
+.btn-secondary:hover {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+/* ── Stepper ── */
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stepper-step {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.stepper-step:not(.stepper-step-active) {
+  opacity: 0.5;
+}
+
+.stepper-step:hover {
+  opacity: 1;
+}
+
+.stepper-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-small);
+  flex-shrink: 0;
+  background: rgba(13, 13, 15, 0.08);
+  color: var(--color-graphite);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.stepper-step-active .stepper-number {
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.stepper-content h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-md);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.stepper-content p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--color-graphite-dark);
+}
+
+/* ── Timeline ── */
+
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(13, 13, 15, 0.1);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 12px 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-periwinkle);
+}
+
+.timeline-item-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-graphite);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Prose (case study) ── */
+
+.prose {
+  max-width: 68ch;
+  line-height: 1.65;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-md);
+  margin: 40px 0 12px;
+  line-height: 1.2;
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 28px 0 8px;
+  line-height: 1.3;
+}
+
+.prose p {
+  margin: 0 0 16px;
+}
+
+.prose ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.prose li {
+  margin-bottom: 8px;
+}
+
+/* ── Utility ── */
+
+.max-prose { max-width: 68ch; }
+
+/* ── Copy button feedback ── */
+
+.copy-btn-copied {
+  background: var(--color-mint) !important;
+  color: var(--color-ink) !important;
+}
+
+/* ── Page container ── */
+
+.page-container {
+  background: var(--color-off-white);
+  border-radius: var(--radius-page);
+  min-height: 100vh;
+  padding: 24px;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    margin-left: 56px;
+    padding: 32px;
+  }
+}
+
+/* ── Bento grid ── */
+
+.bento-grid {
+  display: grid;
+  gap: var(--gap-tile);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Bento tile spanning */
+.bento-2x1 { grid-column: span 2; }
+.bento-1x2 { grid-row: span 2; }
+.bento-2x2 { grid-column: span 2; grid-row: span 2; }
+
+@media (max-width: 639px) {
+  .bento-2x1,
+  .bento-1x2,
+  .bento-2x2 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* ── Hero grid (reference-matching layout) ── */
+
+.hero-grid {
+  display: grid;
+  gap: var(--gap-tile);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "identity"
+    "wordmark"
+    "workflow"
+    "stat1"
+    "stat2"
+    "location"
+    "skills"
+    "education"
+    "cta";
+}
+
+@media (min-width: 640px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "identity  wordmark"
+      "identity  workflow"
+      "stat1     stat2"
+      "location  skills"
+      "education education"
+      "cta       cta";
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 280px 1fr 1fr 160px;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "identity  wordmark   wordmark   stat1"
+      "identity  workflow   workflow   stat2"
+      "location  skills     education  education"
+      "cta       cta        cta        cta";
+  }
+}
+
+/* ── Mobile bottom padding for tab bar ── */
+
+@media (max-width: 767px) {
+  .page-container {
+    padding-bottom: 80px;
+  }
+}
+
+/* ── Section ── */
+
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display-lg);
+  margin: 0 0 24px;
+  line-height: 1.15;
+}
+
+/* ── TODO marker (visible in dev, hidden in prod) ── */
+
+.todo-marker {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #FFF3CD;
+  color: #856404;
+  border-radius: 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+/* ── Workflow strip animation ── */
+
+.workflow-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.workflow-step {
+  padding: 6px 14px;
+  border-radius: var(--radius-chip);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-small);
+  background: rgba(13, 13, 15, 0.06);
+  color: var(--color-graphite);
+  transition:
+    background var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
+}
+
+.workflow-step-active {
+  background: var(--color-ink);
+  color: var(--color-white);
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-step-active {
+    transform: none;
+  }
+}
+
+.workflow-arrow {
+  color: var(--color-graphite);
+  font-size: 1.25rem;
+  line-height: 1;
+}
