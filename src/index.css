@@ -509,15 +509,24 @@ dialog[open] {
 /* ── Page container ── */
 
 .page-container {
+  width: min(100%, 1520px);
+  margin: 0 auto;
   background: var(--color-off-white);
   border-radius: var(--radius-page);
   min-height: 100vh;
-  padding: 24px;
+  padding: 16px;
 }
 
 @media (min-width: 768px) {
   .page-container {
-    margin-left: 56px;
+    margin-left: 72px;
+    width: calc(100% - 72px);
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-container {
     padding: 32px;
   }
 }
@@ -561,7 +570,7 @@ dialog[open] {
 .hero-grid {
   display: grid;
   gap: var(--gap-tile);
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "identity"
     "wordmark"
@@ -576,7 +585,7 @@ dialog[open] {
 
 @media (min-width: 640px) {
   .hero-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "identity  wordmark"
       "identity  workflow"
@@ -589,13 +598,19 @@ dialog[open] {
 
 @media (min-width: 1024px) {
   .hero-grid {
-    grid-template-columns: 280px 1fr 1fr 160px;
+    grid-template-columns: minmax(240px, 280px) minmax(0, 1.5fr) minmax(0, 1fr) minmax(110px, 160px);
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "identity  wordmark   wordmark   stat1"
       "identity  workflow   workflow   stat2"
       "location  skills     education  education"
       "cta       cta        cta        cta";
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-grid > * {
+    min-width: 0;
   }
 }
 

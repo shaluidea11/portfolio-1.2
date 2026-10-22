@@ -17,7 +17,7 @@ export function IdentityCard() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         gridArea: 'identity',
-        minHeight: 480,
+        minHeight: 'clamp(400px, 28vw, 500px)',
         color: 'var(--color-ink)',
         padding: '28px 28px 24px',
         position: 'relative',

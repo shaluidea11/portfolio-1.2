@@ -11,10 +11,12 @@ export function Wordmark() {
           fontSize: 'clamp(4rem, 10vw + 1rem, 9rem)',
           fontWeight: 800,
           letterSpacing: '-0.04em',
-          lineHeight: 0.9,
+          lineHeight: 0.82,
           margin: 0,
           color: 'var(--color-ink)',
-          whiteSpace: 'nowrap',
+          maxWidth: '100%',
+          whiteSpace: 'normal',
+          wordBreak: 'keep-all',
         }}
       >
         Portfoli
